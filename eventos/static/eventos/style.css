@@ -1,0 +1,12 @@
+
+body {
+    display: flex; flex-direction: column; justify-content: center;
+    min-height:100vh;
+    max-width: max-content;
+    margin: auto;
+    background-image: url('images/background.png')
+}
+
+p {
+    color:blueviolet
+}

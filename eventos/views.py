@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+from django.urls import reverse
 
 from .models import Evento
 
@@ -16,5 +17,10 @@ def detail(request, event_id):
     return render(request, 'eventos/detail.html', {'event' : event})
 
 
-def vote(request, event_id):
-    return HttpResponse("You're participating on event %s." % event_id)
+def participate(request, event_id):
+    event = get_object_or_404(Evento, pk=event_id)
+    event.part_number += 1
+    event.save()
+
+
+    return HttpResponseRedirect(reverse('eventos:detail', args=(event.id,)))

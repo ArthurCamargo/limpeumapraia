@@ -1,9 +1,26 @@
-<h1>{{ event.name }}</h1>
-<p> {{ event.pub_date }} </p>
-<h2> {{ event.event_date }} </h2>
-<p> {{ event.descr_text }} </p>
-<p> {{ event.location_map }} </p>
-<p> {{ event.type_event }} </p>
-<h5> {{ event.part_number }} </h5>
-{{event.banner}}
+<html>
+    <head>
+        {% load static %}
+
+        <link rel="stylesheet" type="text/css" href="{% static 'eventos/style.css' %}">
+
+    </head>
+    <body>
+        <h1>{{ event.name }}</h1>
+        <p> {{ event.pub_date }} </p>
+        <h2> {{ event.event_date }} </h2>
+        <p> {{ event.descr_text }} </p>
+        <p> {{ event.location_map }} </p>
+        <p> {{ event.type_event }} </p>
+        <h2> {{ event.part_number }} </h2>
+        {{event.banner}}
+        <form action="{% url 'eventos:participate' event.id %}" method="post"}>
+            {% csrf_token %}
+            <button>
+                <h1>Participar</h1>
+            </button>
+        </form>
+    </body>
+</html>
+
 
