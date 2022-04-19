@@ -4,9 +4,29 @@ body {
     min-height:100vh;
     max-width: max-content;
     margin: auto;
-    background-image: url('images/background.png')
+    background-color: #CBB7B3;
 }
 
+
+
+div.banner { 
+    margin: 5px;
+    border: 1px solid #488E7B;
+    float: left;
+    width: 200px;
+}
+
+div.banner img {
+    width: 100%;
+    height: auto;
+}
+
+#map { height: 180px; }
+
 p {
-    color:blueviolet
+    color: #005858
+}
+
+button.participar {
+    background-color: #005858 
 }

@@ -5,6 +5,7 @@ from django.urls import reverse
 
 from .models import Evento
 
+
 def index(request):
     latest_events_list = Evento.objects.order_by('-pub_date')[:5]
     context = {

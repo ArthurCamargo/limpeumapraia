@@ -1,25 +1,55 @@
+<!DOCTYPE html>
 <html>
     <head>
         {% load static %}
-
         <link rel="stylesheet" type="text/css" href="{% static 'eventos/style.css' %}">
 
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin=""/>
+
+        <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+   integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+   crossorigin=""></script>
     </head>
     <body>
+        
         <h1>{{ event.name }}</h1>
-        <p> {{ event.pub_date }} </p>
-        <h2> {{ event.event_date }} </h2>
-        <p> {{ event.descr_text }} </p>
+        <div class="banner">
+            <img src="{% static event.banner %}" alt="banner">
+        </div>
+
+        <p class="description"> {{ event.descr_text }} </p>
+        <p> Quem crio ? </p>
+
+        
+
+        <div id="map"></div>
+        <script type='text/javascript' src="{% static 'eventos/map.js'%}"> 
+        </script>
+
+
         <p> {{ event.location_map }} </p>
+        <p> {{ event.event_date }} </h2>
         <p> {{ event.type_event }} </p>
-        <h2> {{ event.part_number }} </h2>
-        {{event.banner}}
-        <form action="{% url 'eventos:participate' event.id %}" method="post"}>
-            {% csrf_token %}
-            <button>
-                <h1>Participar</h1>
-            </button>
-        </form>
+        <p> {{ event.location_map }} </p>
+
+        <div>
+            <div>
+            <p> Número de Participantes: {{ event.part_number }} </p>
+            </div>
+
+            <div>
+                <form action="{% url 'eventos:participate' event.id %}" method="post"}>
+                    {% csrf_token %}
+                    <button class="participar">
+                        <h1>Participar</h1>
+                    </button>
+                </form>
+            </div>
+        </div>
+        
     </body>
 </html>
 
