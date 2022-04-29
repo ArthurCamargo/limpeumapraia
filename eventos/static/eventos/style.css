@@ -4,10 +4,8 @@ body {
     min-height:100vh;
     max-width: max-content;
     margin: auto;
-    background-color: #CBB7B3;
+    background-color: #FFF;
 }
-
-
 
 div.banner { 
     margin: 5px;
@@ -21,7 +19,17 @@ div.banner img {
     height: auto;
 }
 
-#map { height: 180px; }
+#map {
+    height: 400px;
+    width: 1000px;
+    max-height: fit-content;
+    max-height: fit-content;
+}
+
+div.map {
+    height: 400px;
+    max-width: 100%;
+}
 
 p {
     color: #005858
