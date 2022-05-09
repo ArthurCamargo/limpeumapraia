@@ -8,11 +8,11 @@ from .models import Evento
 
 class EventoList(ListView):
     model = Evento
-    context_object_name: 'eventos'
+    context_object_name = 'eventos'
 
 class EventoDetail(DetailView):
     model = Evento
-    context_object_name = 'task'
+    context_object_name = 'eventos'
     template_name = 'eventos/evento.html'
 
 class EventoCreate(CreateView):

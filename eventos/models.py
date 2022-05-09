@@ -18,7 +18,7 @@ class Evento(models.Model):
     location_map = PlainLocationField(based_fields=['city'], zoom=7)
     type_event = models.CharField(max_length=40, choices=TYPE_CHOICES)
     part_number = models.IntegerField(default=0)
-    banner = models.ImageField(upload_to='banners' )
+    banner = models.ImageField(upload_to='banners', blank=True, null = True)
 
     def __str__(self):
         return self.name
