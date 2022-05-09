@@ -1,13 +1,12 @@
 from django.urls import path
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import EventoList, EventoCreate, EventoDetail 
+from .views import EventoList, EventoCreate, EventoDetail, EventoUpdate, EventoDelete 
 
-app_name= 'eventos'
 urlpatterns = [
     path('', EventoList.as_view(), name='eventos'),
     path('evento/<int:pk>/', EventoDetail.as_view(), name='evento'),
-    path('evento-create', EventoCreate.as_view(), name='evento-create'),
-] 
+    path('evento-create/', EventoCreate.as_view(), name = 'evento-create'),
+    path('evento-update/<int:pk>/', EventoUpdate.as_view(), name='evento-update'),   
+    path('evento-delete/<int:pk>/', EventoDelete.as_view(), name='evento-delete'),   
 
-urlpatterns += staticfiles_urlpatterns()
+]

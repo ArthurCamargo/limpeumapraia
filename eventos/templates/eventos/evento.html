@@ -13,12 +13,12 @@
    crossorigin=""></script>
     </head>
     <body>
-        <h1>{{ event.name }}</h1>
+        <h1>{{ evento.name }}</h1>
         <div class="banner">
             <img src="{% static event.banner %}" alt="banner">
         </div>
 
-        <p class="description"> {{ event.descr_text }} </p>
+        <p class="description"> {{ evento.descr_text }} </p>
         <p> Quem crio ? </p>
 
         <div id="map"></div>
@@ -26,23 +26,14 @@
         </script>
 
 
-        <p> {{ event.location_map }} </p>
-        <p> {{ event.event_date }} </h2>
-        <p> {{ event.type_event }} </p>
-        <p> {{ event.location_map }} </p>
+        <p> {{ evento.location_map }} </p>
+        <p> {{ evento.event_date }} </h2>
+        <p> {{ evento.type_event }} </p>
+        <p> {{ evento.location_map }} </p>
 
         <div>
             <div>
-            <p> Número de Participantes: {{ event.part_number }} </p>
-            </div>
-
-            <div>
-                <form action="{% url 'eventos:participate' event.id %}" method="post"}>
-                    {% csrf_token %}
-                    <button class="participar">
-                        <h1>Participar</h1>
-                    </button>
-                </form>
+            <p> Número de Participantes: {{ evento.part_number }} </p>
             </div>
         </div>
         

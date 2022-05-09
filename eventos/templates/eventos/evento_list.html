@@ -1,12 +1,21 @@
-<h1>Eventos</h1>
- 
-<table>
-    <tr>
-        <th>Eventos:</th>
-    </tr>
-    {% for evento in eventos %}
-    <tr>
-        <td>{{evento.name}}</td>
-    </tr>
-    {% endfor %}
-</table>
+<html>
+    <head></head>
+    <body>
+        <h1>Eventos</h1>
+        <a href="{% url 'evento-create' %}"> Criar novo Evento </a>
+        
+        <table>
+            <tr>
+                <th>Eventos:</th>
+            </tr>
+            {% for evento in eventos %}
+            <tr>
+                <td>{{evento.name}}</td>
+                <td><a href="{% url 'evento' evento.id %}">Ver</a></td>
+                <td><a href="{% url 'evento-update' evento.id %}">Editar</a></td>
+                <td><a href="{% url 'evento-delete' evento.id %}">Deletar</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
