@@ -1,8 +1,15 @@
 <html>
     <head></head>
     <body>
+        {% if request.user.is_authenticated %}
+            <p>{{request.user}}</p>
+            <a href="{% url 'users:logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'users:login' %}">Login</a>
+        {% endif %}
+        <hr>
         <h1>Eventos</h1>
-        <a href="{% url 'evento-create' %}"> Criar novo Evento </a>
+        <a href="{% url 'eventos:evento-create' %}"> Criar novo Evento </a>
         
         <table>
             <tr>
@@ -11,9 +18,9 @@
             {% for evento in eventos %}
             <tr>
                 <td>{{evento.name}}</td>
-                <td><a href="{% url 'evento' evento.id %}">Ver</a></td>
-                <td><a href="{% url 'evento-update' evento.id %}">Editar</a></td>
-                <td><a href="{% url 'evento-delete' evento.id %}">Deletar</a></td>
+                <td><a href="{% url 'eventos:evento' evento.id %}">Ver</a></td>
+                <td><a href="{% url 'eventos:evento-update' evento.id %}">Editar</a></td>
+                <td><a href="{% url 'eventos:evento-delete' evento.id %}">Deletar</a></td>
             </tr>
             {% endfor %}
         </table>
