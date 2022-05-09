@@ -1,0 +1,14 @@
+<h1>Eventos:</h1>
+ 
+<table>
+    <tr>
+        <th>Item:</th>
+    </tr>
+    {% for evento in eventos %}
+    <tr>
+        <td>{{evento.name}}</td>
+    </tr>
+    {% empty %}
+    <h3> There is no events here.</h3>
+    {% endfor %}
+</table>

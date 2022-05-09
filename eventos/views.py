@@ -1,27 +1,21 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template import loader
-from django.urls import reverse
+from django.shortcuts import render
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView
+from django.urls import reverse_lazy
 
 from .models import Evento
 
+class EventoList(ListView):
+    model = Evento
+    context_object_name: 'eventos'
 
-def index(request):
-    latest_events_list = Evento.objects.order_by('-pub_date')[:5]
-    context = {
-        'latest_events_list': latest_events_list,
-    }
-    return render(request, 'eventos/index.html', context)
+class EventoDetail(DetailView):
+    model = Evento
+    context_object_name = 'task'
+    template_name = 'eventos/evento.html'
 
-def detail(request, event_id):
-    event = get_object_or_404(Evento, pk=event_id)
-    return render(request, 'eventos/detail.html', {'event' : event})
-
-
-def participate(request, event_id):
-    event = get_object_or_404(Evento, pk=event_id)
-    event.part_number += 1
-    event.save()
-
-
-    return HttpResponseRedirect(reverse('eventos:detail', args=(event.id,)))
+class EventoCreate(CreateView):
+    model = Evento
+    fields = '__all__'
+    success_url = reverse_lazy('eventos')
