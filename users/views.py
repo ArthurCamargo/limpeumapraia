@@ -7,7 +7,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 
-from .models import Users
+from .models import NewUser
 
 
 class CustomLoginView(LoginView):
@@ -17,34 +17,3 @@ class CustomLoginView(LoginView):
 
     def get_success_url(self):
         return reverse_lazy('eventos:eventos')
-
-
-# Create your views here.
-def homepage(request):
-    return render(request = request,
-                  template_name='users/home.html')
-
-def register(request):
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            username = form.cleaned_data.get('username')
-            login(request, user)
-            return redirect("users:homepage")
-
-        else:
-            for msg in form.error_messages:
-                print(form.error_messages[msg])
-
-            return render(request = request,
-                          template_name = "users/register.html",
-                          context={"form":form})
-
-    form = UserCreationForm
-    return render(request = request,
-                  template_name = "users/register.html",
-                  context={"form":form})
-
-def info(request):
-    return render(request, 'users/info.html')

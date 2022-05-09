@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import NewUser
 from location_field.models.plain import PlainLocationField
 
 # Create your models here.
@@ -10,6 +11,7 @@ class Evento(models.Model):
         ("T", "Tradicional"),
     )
 
+    creator = models.ForeignKey(NewUser, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=255)
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name='date published')
     event_date = models.DateTimeField('event date')

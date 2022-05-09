@@ -139,3 +139,7 @@ LOCATION_FIELD = {
     'search.provider': 'nominatim',
     'map.zoom': 13,
 }
+
+AUTH_USER_MODEL = 'users.NewUser'
+
+LOGIN_URL = 'users:login'

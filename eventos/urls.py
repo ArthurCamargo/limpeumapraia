@@ -1,11 +1,12 @@
 from django.urls import path
 
-from .views import EventoList, EventoCreate, EventoDetail, EventoUpdate, EventoDelete 
+from .views import EventoList, EventoCreate, EventoDetail, EventoUpdate, EventoDelete, EventoUserList
 
 app_name ='eventos'
 urlpatterns = [
     path('', EventoList.as_view(), name='eventos'),
     path('evento/<int:pk>/', EventoDetail.as_view(), name='evento'),
+    path('evento-user', EventoUserList.as_view(), name='evento-user'),
     path('evento-create/', EventoCreate.as_view(), name = 'evento-create'),
     path('evento-update/<int:pk>/', EventoUpdate.as_view(), name='evento-update'),   
     path('evento-delete/<int:pk>/', EventoDelete.as_view(), name='evento-delete'),   
