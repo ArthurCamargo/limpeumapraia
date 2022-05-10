@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-
-<head>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'users/css/style.css' %}">
-</head>
+{% extends 'eventos/main.html' %}
+{% block content %}
 <body>
     <!-- templates/registration/login.html -->
     <h2>Log In</h2>
@@ -12,4 +8,7 @@
     {{ form.as_p }}
     <button type="submit">Log In</button>
     </form>
-</body>
+
+    <p>Não tem conta? <a href="{% url 'users:register' %}">clica em mim ;)</a></p>
+    
+{% endblock content %}

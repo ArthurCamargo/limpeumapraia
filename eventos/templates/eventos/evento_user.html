@@ -1,23 +1,26 @@
-<html>
-    <head></head>
-    <body>
-        <h1>Meus Eventos</h1>
-        
-        <table>
-            <tr>
-                <th>Eventos:</th>
-            </tr>
-            {% for evento in eventos %}
-            <tr>
-                <td><a href="{% url 'eventos:evento' evento.id %}">{{evento.name}}</a></td>
-                {% if request.user.is_authenticated %}
-                    <td><a href="{% url 'eventos:evento-update' evento.id %}">Editar</a></td>
-                    <td><a href="{% url 'eventos:evento-delete' evento.id %}">Deletar</a></td>
-                {% endif %}
-            </tr>
-            {% endfor %}
-        </table>
+{% extends 'eventos/main.html' %}
+{% block content %}
 
-        <a href="{% url 'eventos:evento-create' %}"> Criar novo Evento </a>
-    </body>
-</html>
+    <h1>Meus Eventos</h1>
+    <form method="GET">
+        <input type="text" name="search-area" value="{{ search_input }}">
+        <input type="submit" name="procurar" id="search">  
+    </form>
+    <table>
+        <tr>
+            <th>{{ search_input }}</th>
+        </tr>
+        {% for evento in eventos %}
+        <tr>
+            <td><a href="{% url 'eventos:evento' evento.id %}">{{evento.name}}</a></td>
+            {% if request.user.is_authenticated %}
+                <td><a href="{% url 'eventos:evento-update' evento.id %}">Editar</a></td>
+                <td><a href="{% url 'eventos:evento-delete' evento.id %}">Deletar</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{% url 'eventos:evento-create' %}"> Criar novo Evento </a>
+
+{% endblock content %}
