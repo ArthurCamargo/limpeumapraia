@@ -24,14 +24,23 @@ class EventoList(ListView):
 
         return context
 
+class HomeView(ListView):
+    model = Evento
+    template_name='eventos/home.html'
+    context_object_name = 'eventos'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['eventos'] = context['eventos'].order_by('event_date')  
+        context['eventos'] = context['eventos'][0:4]
+
+        return context
 
 class EventoDetail(DetailView):
     model = Evento
     context_object_name = 'evento'
     template_name = 'eventos/evento.html'
-
-    
 
 
 class EventoUserList(LoginRequiredMixin, ListView):
@@ -56,7 +65,7 @@ class EventoCreate(LoginRequiredMixin, CreateView):
     model = Evento
     fields = ['name', 'event_date', 'descr_text', 'city_text',
               'location_map', 'type_event', 'banner']
-    success_url = reverse_lazy('eventos:eventos')
+    success_url = reverse_lazy('eventos:evento-list')
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -65,9 +74,9 @@ class EventoCreate(LoginRequiredMixin, CreateView):
 class EventoUpdate(LoginRequiredMixin, UpdateView):
     model = Evento
     fields = '__all__'
-    success_url = reverse_lazy('eventos:eventos')
+    success_url = reverse_lazy('eventos:evento-list')
 
 class EventoDelete(LoginRequiredMixin, DeleteView):
     model = Evento
     context_object_name = 'evento'
-    success_url = reverse_lazy('eventos:eventos')
+    success_url = reverse_lazy('eventos:evento-list')

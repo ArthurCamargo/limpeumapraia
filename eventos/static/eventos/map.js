@@ -9,3 +9,10 @@ L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     subdomains: ['a','b','c']
 }).addTo( map );
+
+function addMarker(coord){
+    coord.split(",");
+    L.marker([parseFloat(coord[0]), parseFloat(coord[1])]).addTo(Map)
+}
+
+    

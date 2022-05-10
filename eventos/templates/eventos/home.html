@@ -1,0 +1,76 @@
+{% extends 'eventos/main.html' %}
+{% block content %}
+
+    <div class="header-bar">
+        <div>
+            <a href="{% url 'eventos:evento-list' %}"> Eventos </a>
+        </div>
+
+        {% if request.user.is_authenticated %}
+            
+            <div class="user-wrapper">
+                <h4>{{request.user|title}}</h4>
+                <div class="avatar-icon">
+                    {% load static %}
+                    <a href="">
+                        <img src="{% static 'eventos/images/user.png' %}" alt="avatar"> 
+                    </a>
+                </div>
+                <a href="{% url 'users:logout' %}"> Logout </a>
+            </div>
+ 
+        {% else %}
+            <a href="{% url 'users:login' %}">Login</a>
+        {% endif %}
+
+    </div>
+
+    
+
+    <hr>
+    <h1>Nossas praias estão sujas</h1>
+
+    <img src="" alt="Pria mega suja">
+
+    <p> Os oceanos recebem 8 milhões de toneladas de plástico por ano. Prejudica a vida de animais marinhos,
+         a balneabilidade das águas e atividades como a pesca.
+        <br>
+        <br>
+         Resíduos sólidos estão presentes nos mais diferentes compartimentos dos oceanos, 
+        da superfície às profundezas.
+         Pesquisadores observaram itens plásticos descartáveis até nas Fossas Marianas,
+        ponto mais profundo dos oceanos, há 10.898 metros
+    </p>
+
+    
+
+    <h1>O que podemos fazer ?</h1>
+    
+    <img src="" alt="fazendo alguma coisa">
+
+    <p>
+        Para ajudar na limpeza de nossas praias, precisamos da ajuda de todos.
+         Se inscreva nos eventos próximos de você ou crie eventos para que outras pessoas 
+         consigam se voluntariar e ajudar nessa causa.
+    </p>
+
+    <h2>
+        Confira abaixo os últimos eventos que irão acontecer:
+    </h2>
+
+    <div class="eventos-ultimos-items-wrapper">
+        {% for evento in eventos %}
+            <div class="evento-wrapper">
+                <div class="evento-name">
+                    <div class="task-participate-icon"></div>
+                    <a href="{% url 'eventos:evento' evento.id %}"> {{evento.name}}</a>
+                </div>
+
+            </div>
+        {% empty %}
+        <h3>Não temos eventos por agora</h3>
+        {% endfor %}
+    </div>
+
+
+{% endblock content %}

@@ -2,7 +2,7 @@
 {% block content %}
 
 
-<a href="{% url 'eventos:eventos' %}">Voltar</a>
+<a href="{% url 'eventos:evento-list' %}">Voltar</a>
 <form method="POST" action="">
     {% csrf_token %}
     <p>Tem certeza que deseja deletar esse evento? "{{evento}}"</p>
