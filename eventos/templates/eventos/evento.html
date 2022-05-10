@@ -1,29 +1,52 @@
 {% extends 'eventos/main.html' %}
-{% block content %}
+
 
 {% load static %}
 
+
+{% block headerbar %}
+    <div>
+        <a href="{% url 'eventos:evento-list' %}"> Eventos </a>
+    </div>
+
+    {% if request.user.is_authenticated %}
+        
+        <div class="user-wrapper">
+            <h4>{{request.user|title}}</h4>
+            <div class="avatar-icon">
+                {% load static %}
+                <a href="">
+                    <img src="{% static 'eventos/images/user.png' %}" alt="avatar"> 
+                </a>
+            </div>
+            <a href="{% url 'users:logout' %}"> Logout </a>
+        </div>
+
+    {% else %}
+        <a href="{% url 'users:login' %}">Login</a>
+    {% endif %}
+{% endblock headerbar %}
+
+{% block content %}
+
+
 <h1>{{ evento.name }}</h1>
 <div class="banner">
-    <img src="{% static event.banner %}" alt="banner">
 </div>
 
 <p class="description"> {{ evento.descr_text }} </p>
-<p> Quem crio ? </p>
 
-<div id="map">
-</div>
+<div id="map"></div>
 
 <script type='text/javascript' src="{% static 'eventos/map.js'%}">
-    console.log("something");
-    addMarker("{{ evento.location_map }}");
 </script>
 
+<script>
+    var marker = addMarker("{{evento.name}}", "{{ evento.event_date|date:'d-m-y'}}" ,"{{ evento.location_map }}", map);
+</script>
 
-<p> {{ evento.location_map }} </p>
 <p> {{ evento.event_date }} </h2>
 <p> {{ evento.type_event }} </p>
-<p> {{ evento.location_map }} </p>
 
 <div>
     <div>

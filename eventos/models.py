@@ -2,7 +2,8 @@ from django.db import models
 from users.models import NewUser
 from location_field.models.plain import PlainLocationField
 
-# Create your models here.
+
+
 class Evento(models.Model):
     TYPE_CHOICES = ( 
         ("C", "Competicao"),

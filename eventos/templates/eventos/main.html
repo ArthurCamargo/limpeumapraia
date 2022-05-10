@@ -1,90 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
 
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'eventos/style.css' %}">
+
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@1&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap" rel="stylesheet"> 
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> 
+    </script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+    crossorigin=""/>
 
 
-    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-        crossorigin=""/>
-
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-   crossorigin=""></script>
+    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+    crossorigin=""></script>
 
-
-   {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'eventos/style.css' %}">
+    {{form.media}}
 
     <title>Limpe uma Praia</title>
 </head>
 
-{% load static %}
-
-<style>
-
-    h1,h2,h3,h4,h5,h6
-    {
-        font-family: 'PT Serif', serif;
-    }
-
-    body{
-        background-image: url("{% static 'eventos/images/wave.webp' %}");
-        background-color:antiquewhite;
-        font-family: 'Merriweather', serif;
-        padding-top: 50px;
-    }
-
-    .container{
-        max-width: 1250px;
-        margin: auto;
-        background-color: #DBF5F0;
-        -webkit-box-shadow: 2px 2px 13px -4px #A4E5E0;
-        box-shadow: 2px 2px 13px -4px  #A4E5E0;
-    }
-
-    .header-bar{
-        display: flex;
-        justify-content: space-between;
-        color: white;
-        padding: 10px;
-        border-radius: 5px 5px 0 0;
-        background: linear-gradient(90deg, #0C6170 0%, #37BEB0 43%, #A4E5E0 100%);
-    }
-
-    .header-bar a{
-        color: whitesmoke;
-        text-decoration: none;
-    }
-
-    .evento-wrapper{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px;
-        background-color: white;
-        border-top: 1px solid rgb(226, 226, 226);
-    }
-
-</style>
-
-
 <body>
     <div class="container">
-        {% block content %}
+        <div class="header-bar">
+            <a href="{% url 'eventos:home' %}">
+                <div class="home-icon">
+                    {% load static %}
+                    <img src="{% static 'eventos/images/home.png'%}" alt="home">
+                </div>
+            </a>
+            {% block headerbar %}
+            {% endblock headerbar %}
+        </div>
 
+        {% block content %}
         {% endblock content %}
     </div>
 </body>

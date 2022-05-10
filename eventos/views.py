@@ -2,11 +2,14 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Evento
+from .forms import EventoForm
+
 
 class EventoList(ListView):
     model = Evento
@@ -61,15 +64,17 @@ class EventoUserList(LoginRequiredMixin, ListView):
 
         return context
 
-class EventoCreate(LoginRequiredMixin, CreateView):
+class EventoCreate(CreateView):
     model = Evento
-    fields = ['name', 'event_date', 'descr_text', 'city_text',
-              'location_map', 'type_event', 'banner']
+    fields=["name", "event_date", "descr_text", "location_map", "type_event"]
+    template_name = "eventos/evento_form.html"
     success_url = reverse_lazy('eventos:evento-list')
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
         return super(EventoCreate, self).form_valid(form)
+
+
 
 class EventoUpdate(LoginRequiredMixin, UpdateView):
     model = Evento

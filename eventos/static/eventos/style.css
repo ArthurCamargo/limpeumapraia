@@ -1,40 +1,84 @@
 
-body {
-    display: flex; flex-direction: column; justify-content: center;
-    min-height:100vh;
-    max-width: max-content;
-    margin: auto;
-    background-color: #FFF;
-}
+#map { height: 600px; }
 
-div.banner { 
-    margin: 5px;
-    border: 1px solid #488E7B;
-    float: left;
-    width: 200px;
-}
-
-div.banner img {
+#praia-suja {
+    height: 100%;
     width: 100%;
-    height: auto;
+    filter: brightness(80%);
 }
 
-#map {
-    height: 400px;
-    width: 1000px;
-    max-height: fit-content;
-    max-height: fit-content;
+#coleta-lixo {
+    height: 100%;
+    width: 100%;
+    filter: brightness(80%);
 }
 
-div.map {
-    height: 400px;
-    max-width: 100%;
+#mapa-div{
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 
-p {
-    color: #005858
+.map-widget{
+    max-width: 1250px;
+    margin: auto;
+    text-align: center;
+    background-color: #DBF5F0;
+    -webkit-box-shadow: 2px 2px 13px -4px #A4E5E0;
+    box-shadow: 2px 2px 13px -4px  #A4E5E0;
 }
 
-button.participar {
-    background-color: #005858 
+h1,h2,h3,h4,h5,h6
+{
+    color:rgb(11, 19, 82);
+    font-size: 200%;
+    font-family: 'PT Serif', serif;
 }
+
+body{
+    background-image: url("{% static 'eventos/images/wave.webp' %}");
+    background-color:antiquewhite;
+    font-family: 'Merriweather', serif;
+    padding-top: 50px;
+    color: #000C66;
+}
+
+.container{
+    max-width: 1250px;
+    margin: auto;
+    text-align: center;
+    background-color: #DBF5F0;
+    -webkit-box-shadow: 2px 2px 13px -4px #A4E5E0;
+    box-shadow: 2px 2px 13px -4px  #A4E5E0;
+}
+
+.header-bar{
+    display: flex;
+    justify-content: space-between;
+    color: #0000FF;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    background: linear-gradient(90deg, #0C6170 0%, #37BEB0 43%, #A4E5E0 100%);
+}
+
+.header-bar a{
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.evento-wrapper{
+    display: flexbox;
+    justify-content: space-between;
+    padding: 40px;
+    background-color: white;
+    border-top: 1px solid rgb(226, 226, 226);
+}
+
+.eventos-ultimos-items-wrapper{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    padding: 10px;
+}
+
+nav ul{height:200px; width:95%;}
+nav ul{overflow:hidden; overflow-y:scroll;}

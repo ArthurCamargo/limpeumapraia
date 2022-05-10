@@ -1,57 +1,78 @@
 {% extends 'eventos/main.html' %}
+
+
+
+{% block headerbar %}
+
+    <div></div>
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'users:logout' %}">Logout</a>
+    <a href="{% url 'eventos:evento-user' %}"> Meus eventos</a>
+
+    {% else %}
+        <a href="{% url 'users:login' %}">Login</a>
+    {% endif %}
+
+{% endblock headerbar %}
+
+
 {% block content %}
 
-
-    <div class="header-bar">
-        <div>
-            <h1>Hello {{request.user|title}}  </h1>
-        </div>
-
-        {% if request.user.is_authenticated %}
-        <a href="{% url 'users:logout' %}">Logout</a>
-        <a href="{% url 'eventos:evento-user' %}"> Meus eventos</a>
-
-        {% else %}
-            <a href="{% url 'users:login' %}">Login</a>
-        {% endif %}
+<h1>Eventos</h1>
 
 
-    </div>
+<div id="map"></div>
 
-    
+{% load static %}
+<script type='text/javascript' src="{% static 'eventos/map.js'%}">
+</script>
+
+{% for evento in eventos %}
+    <script>
+        
+        marker = addMarker("{{evento.name}}", "{{ evento.event_date|date:'d-m-y'}}" ,"{{ evento.location_map }}", map);
+        
+        marker.on('dblclick', function(ev) {
+            window.location.href = "{% url 'eventos:evento' evento.id %}";
+        });
+
+        zoom("-10.321599238904229, -51.65237056681336", map, 4);
+    </script>
+{% endfor %}
 
 
-    <hr>
-    <h1>Eventos</h1>
 
-    <form method="GET">
-        <input type="text" name="search-area" value="{{ search_input }}">
-        <input type="submit" name="procurar" id="search">  
-    </form>
-
-
-    <div class="eventos-items-wrapper">
-        {% for evento in eventos %}
-
-            <div class="evento-wrapper">
-                <div class="evento-name">
-                    <div class="task-participate-icon"></div>
-                    <a href="{% url 'eventos:evento' evento.id %}"> {{evento.name}}</a>
+<div>
+    <nav>
+        <ul>
+            {% for evento in eventos %}
+                <div class="evento-wrapper">
+                    <div class="evento-name">
+                        <div class="task-participate-icon"></div>
+                        <a href="{% url 'eventos:evento' evento.id %}"> {{evento.name}}</a>
+                    </div>
                 </div>
+            {% empty %}
+            <h3>Não temos eventos por agora</h3>
+            {% endfor %}
+        </ul>
+    </nav>
+</div>
 
-            </div>
+
+<form method="GET">
+    <input type="text" name="search-area" value="{{ search_input }}">
+    <input type="submit" name="procurar" id="search">  
+</form>
 
 
 
-        {% empty %}
-        <h3>Não temos eventos por agora</h3>
-        {% endfor %}
-    </div>
 
-    {% if request.user.is_authenticated %}
-    <div class="create-button">
-        <a href="{% url 'eventos:evento-create' %}"> Criar novo Evento </a>
-    </div>
-    {% endif %}
+
+{% if request.user.is_authenticated %}
+<div class="create-button">
+    <a href="{% url 'eventos:evento-create' %}"> Criar novo Evento </a>
+</div>
+{% endif %}
 
 {% endblock content %}

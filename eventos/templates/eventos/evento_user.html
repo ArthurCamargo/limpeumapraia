@@ -1,26 +1,53 @@
 {% extends 'eventos/main.html' %}
+
+
+{% block headerbar %}
+
+    <div>
+        <a href="{% url 'eventos:evento-list' %}"> Eventos </a>
+    </div>
+
+    {% if request.user.is_authenticated %}
+        
+        <div class="user-wrapper">
+            {{request.user|title}}
+            <div class="avatar-icon">
+                {% load static %}
+                <a href="">
+                    <img src="{% static 'eventos/images/user.png' %}" alt="avatar"> 
+                </a>
+            </div>
+            <a href="{% url 'users:logout' %}"> Logout </a>
+        </div>
+
+    {% else %}
+        <a href="{% url 'users:login' %}">Login</a>
+    {% endif %}</div>
+
+{% endblock headerbar %}
+
 {% block content %}
 
-    <h1>Meus Eventos</h1>
-    <form method="GET">
-        <input type="text" name="search-area" value="{{ search_input }}">
-        <input type="submit" name="procurar" id="search">  
-    </form>
-    <table>
-        <tr>
-            <th>{{ search_input }}</th>
-        </tr>
-        {% for evento in eventos %}
-        <tr>
-            <td><a href="{% url 'eventos:evento' evento.id %}">{{evento.name}}</a></td>
-            {% if request.user.is_authenticated %}
-                <td><a href="{% url 'eventos:evento-update' evento.id %}">Editar</a></td>
-                <td><a href="{% url 'eventos:evento-delete' evento.id %}">Deletar</a></td>
-            {% endif %}
-        </tr>
-        {% endfor %}
-    </table>
+<h1>Meus Eventos</h1>
+<form method="GET">
+    <input type="text" name="search-area" value="{{ search_input }}">
+    <input type="submit" name="procurar" id="search">  
+</form>
+<table>
+    <tr>
+        <th>{{ search_input }}</th>
+    </tr>
+    {% for evento in eventos %}
+    <tr>
+        <td><a href="{% url 'eventos:evento' evento.id %}">{{evento.name}}</a></td>
+        {% if request.user.is_authenticated %}
+            <td><a href="{% url 'eventos:evento-update' evento.id %}">Editar</a></td>
+            <td><a href="{% url 'eventos:evento-delete' evento.id %}">Deletar</a></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
 
-    <a href="{% url 'eventos:evento-create' %}"> Criar novo Evento </a>
+<a href="{% url 'eventos:evento-create' %}"> Criar novo Evento </a>
 
 {% endblock content %}
